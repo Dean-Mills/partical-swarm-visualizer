@@ -51,4 +51,4 @@ class Particle:
         if newCost < self.bestCost:
             self.bestCost = newCost
             self.bestPostion = x
-        return newCost
+        return [newCost,self.position]
