@@ -1,25 +1,48 @@
-import sys, pygame
+import pygame
+import sys
+
+SCREEN_SIZE = WIDTH, HEIGHT = (640, 480)
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+RED = (255, 50, 50)
+GREEN = (50, 255, 50)
+CIRCLE_RADIUS = 30
+
+# Initialization
 pygame.init()
+screen = pygame.display.set_mode(SCREEN_SIZE)
+pygame.display.set_caption('Circles')
+fps = pygame.time.Clock()
+paused = False
 
-size = width, height = 320, 240
-speed = [1, 1]
-black = 0, 0, 0
+# Ball setup
+ball_pos1 = [50, 50]
+ball_pos2 = [50, 240]
+ball_pos3 = [50, 430]
 
-screen = pygame.display.set_mode(size)
+def update():
+    ball_pos1[0] += 5
+    ball_pos2[0] += 3
+    ball_pos3[0] += 1
 
-ball = pygame.image.load("intro_ball.gif")
-ballrect = ball.get_rect()
 
-while 1:
+def render():
+    screen.fill(BLACK)
+    pygame.draw.circle(screen, RED, ball_pos1, CIRCLE_RADIUS, 0)
+    pygame.draw.circle(screen, WHITE, ball_pos2, CIRCLE_RADIUS, 0)
+    pygame.draw.circle(screen, GREEN, ball_pos3, CIRCLE_RADIUS, 0)
+    pygame.display.update()
+    fps.tick(60)
+
+
+while True:
     for event in pygame.event.get():
-        if event.type == pygame.QUIT: sys.exit()
-
-    ballrect = ballrect.move(speed)
-    if ballrect.left < 0 or ballrect.right > width:
-        speed[0] = -speed[0]
-    if ballrect.top < 0 or ballrect.bottom > height:
-        speed[1] = -speed[1]
-
-    screen.fill(black)
-    screen.blit(ball, ballrect)
-    pygame.display.flip()
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_SPACE:
+                paused = not paused
+    if not paused:
+        update()
+        render()
