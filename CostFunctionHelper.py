@@ -3,12 +3,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # x = np.outer(np.linspace(-2, 2, 30), np.ones(30))
-x = y = np.linspace(-2,2,1000)
+x = y = np.linspace(-5,5,100)
 
 # y = x.copy().T # transpose
 x, y = np.meshgrid(x, y)
 
-a = 1
+a = 1.5
 b = 100
 #z = np.cos(x ** 2 + y ** 2)
 z = (a-x)**2 + b*(y-x**2)**2

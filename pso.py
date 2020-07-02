@@ -18,7 +18,7 @@ def cost(pos):
 w = 0.9
 c1 = 2
 c2 = 2
-bounds = ([-3,3],[-3,3])
+bounds = ([-5,5],[-5,5])
 globalBestPosition = np.array([random.uniform(bounds[0][0],bounds[0][1]),random.uniform(bounds[1][0],bounds[1][1])])
 globalBestVal = cost(globalBestPosition)
 numParticles = 1000
@@ -36,6 +36,6 @@ for y in range(numIterations):
             globalBestPosition = returnValues[1]
             error = globalBestVal
         print(error)
-    w = w- 0.01
+    w = w- 0.001
 print(w)
 print(globalBestPosition)
